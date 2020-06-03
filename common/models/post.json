@@ -1,0 +1,71 @@
+{
+  "name": "Post",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignkey": "userId"
+    },
+    "Profile": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignkey": "profileId"
+    },
+    "Category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignkey": "categoryId"
+    },
+    "PostImage": {
+      "type": "hasMany",
+      "model": "PostImage",
+      "foreignkey": ""
+    },
+    "Comments": {
+      "type": "hasMany",
+      "model": "Comment",
+      "foreignkey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "editor",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
